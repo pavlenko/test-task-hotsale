@@ -8,7 +8,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $request = Request::createFromGlobals();
 if ($request->isMethod(Request::METHOD_POST)) {
-    usleep(300000);//TODO remove
+    usleep(200000);// <-- this emulate backend processing time
 }
 
 $errors = (new Registration())->handle($request);
@@ -32,46 +32,52 @@ $errors = (new Registration())->handle($request);
                     <h4 class="alert-heading"><?php echo $errors[Registration::GLOBAL_ERROR_KEY] ?></h4>
                 </div>
             <?php } ?>
-            <!-- FORM (was-validated must be added only after validation) -->
             <h4 class="card-title border-bottom pb-2">Registration</h4>
             <form data-role="register" action="register.php" novalidate method="post" class="needs-validation">
                 <div class="form-group">
                     <label for="<?php echo Registration::FIELD_FIRST_NAME ?>">First Name</label>
-                    <input id="<?php echo Registration::FIELD_FIRST_NAME ?>" name="<?php echo Registration::FIELD_FIRST_NAME ?>" type="text" class="form-control is-invalid">
-                    <div class="invalid-feedback">
-                        First Name required
-                    </div>
+                    <input id="<?php echo Registration::FIELD_FIRST_NAME ?>"
+                           name="<?php echo Registration::FIELD_FIRST_NAME ?>"
+                           type="text"
+                           value="<?php echo $request->get(Registration::FIELD_FIRST_NAME) ?>"
+                           class="form-control <?php if (!empty($errors[Registration::FIELD_FIRST_NAME])) echo 'is-invalid' ?>">
+                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_FIRST_NAME] ?></div>
                 </div>
                 <div class="form-group">
                     <label for="<?php echo Registration::FIELD_LAST_NAME ?>">Lst Name</label>
-                    <input id="<?php echo Registration::FIELD_LAST_NAME ?>" name="<?php echo Registration::FIELD_LAST_NAME ?>" type="text" class="form-control is-invalid">
-                    <div class="invalid-feedback">
-                        Last Name required
-                    </div>
+                    <input id="<?php echo Registration::FIELD_LAST_NAME ?>"
+                           name="<?php echo Registration::FIELD_LAST_NAME ?>"
+                           type="text"
+                           value="<?php echo $request->get(Registration::FIELD_LAST_NAME) ?>"
+                           class="form-control <?php if (!empty($errors[Registration::FIELD_LAST_NAME])) echo 'is-invalid' ?>">
+                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_FIRST_NAME] ?></div>
                 </div>
                 <div class="form-group">
                     <label for="<?php echo Registration::FIELD_EMAIL ?>">Email</label>
-                    <input id="<?php echo Registration::FIELD_EMAIL ?>" name="<?php echo Registration::FIELD_EMAIL ?>" type="email" class="form-control is-invalid">
-                    <div class="invalid-feedback">
-                        Email required
-                    </div>
+                    <input id="<?php echo Registration::FIELD_EMAIL ?>"
+                           name="<?php echo Registration::FIELD_EMAIL ?>"
+                           type="email"
+                           value="<?php echo $request->get(Registration::FIELD_EMAIL) ?>"
+                           class="form-control <?php if (!empty($errors[Registration::FIELD_EMAIL])) echo 'is-invalid' ?>">
+                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_EMAIL] ?></div>
                 </div>
                 <div class="form-group">
                     <label for="<?php echo Registration::FIELD_PASSWORD ?>">Password</label>
-                    <input id="<?php echo Registration::FIELD_PASSWORD ?>" name="<?php echo Registration::FIELD_PASSWORD ?>" type="password" class="form-control is-invalid">
-                    <div class="invalid-feedback">
-                        Password required
-                    </div>
+                    <input id="<?php echo Registration::FIELD_PASSWORD ?>"
+                           name="<?php echo Registration::FIELD_PASSWORD ?>"
+                           type="password"
+                           value="<?php echo $request->get(Registration::FIELD_PASSWORD) ?>"
+                           class="form-control <?php if (!empty($errors[Registration::FIELD_PASSWORD])) echo 'is-invalid' ?>">
+                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_PASSWORD] ?></div>
                 </div>
                 <div class="form-group">
                     <label for="<?php echo Registration::FIELD_REPEAT_PASSWORD ?>">Repeat Password</label>
-                    <input id="<?php echo Registration::FIELD_REPEAT_PASSWORD ?>" name="<?php echo Registration::FIELD_REPEAT_PASSWORD ?>" type="password" class="form-control is-invalid">
-                    <div class="invalid-feedback">
-                        Repeat Password required
-                    </div>
-                    <div class="invalid-feedback">
-                        Passwords must be same
-                    </div>
+                    <input id="<?php echo Registration::FIELD_REPEAT_PASSWORD ?>"
+                           name="<?php echo Registration::FIELD_REPEAT_PASSWORD ?>"
+                           type="password"
+                           value="<?php echo $request->get(Registration::FIELD_REPEAT_PASSWORD) ?>"
+                           class="form-control <?php if (!empty($errors[Registration::FIELD_REPEAT_PASSWORD])) echo 'is-invalid' ?>">
+                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_REPEAT_PASSWORD] ?></div>
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
             </form>
