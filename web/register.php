@@ -41,7 +41,7 @@ $errors = (new Registration())->handle($request);
                            type="text"
                            value="<?php echo $request->get(Registration::FIELD_FIRST_NAME) ?>"
                            class="form-control <?php if (!empty($errors[Registration::FIELD_FIRST_NAME])) echo 'is-invalid' ?>">
-                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_FIRST_NAME] ?></div>
+                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_FIRST_NAME] ?? '' ?></div>
                 </div>
                 <div class="form-group">
                     <label for="<?php echo Registration::FIELD_LAST_NAME ?>">Lst Name</label>
@@ -50,7 +50,7 @@ $errors = (new Registration())->handle($request);
                            type="text"
                            value="<?php echo $request->get(Registration::FIELD_LAST_NAME) ?>"
                            class="form-control <?php if (!empty($errors[Registration::FIELD_LAST_NAME])) echo 'is-invalid' ?>">
-                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_FIRST_NAME] ?></div>
+                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_FIRST_NAME] ?? '' ?></div>
                 </div>
                 <div class="form-group">
                     <label for="<?php echo Registration::FIELD_EMAIL ?>">Email</label>
@@ -59,7 +59,7 @@ $errors = (new Registration())->handle($request);
                            type="email"
                            value="<?php echo $request->get(Registration::FIELD_EMAIL) ?>"
                            class="form-control <?php if (!empty($errors[Registration::FIELD_EMAIL])) echo 'is-invalid' ?>">
-                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_EMAIL] ?></div>
+                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_EMAIL] ?? '' ?></div>
                 </div>
                 <div class="form-group">
                     <label for="<?php echo Registration::FIELD_PASSWORD ?>">Password</label>
@@ -68,7 +68,7 @@ $errors = (new Registration())->handle($request);
                            type="password"
                            value="<?php echo $request->get(Registration::FIELD_PASSWORD) ?>"
                            class="form-control <?php if (!empty($errors[Registration::FIELD_PASSWORD])) echo 'is-invalid' ?>">
-                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_PASSWORD] ?></div>
+                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_PASSWORD] ?? '' ?></div>
                 </div>
                 <div class="form-group">
                     <label for="<?php echo Registration::FIELD_REPEAT_PASSWORD ?>">Repeat Password</label>
@@ -77,7 +77,7 @@ $errors = (new Registration())->handle($request);
                            type="password"
                            value="<?php echo $request->get(Registration::FIELD_REPEAT_PASSWORD) ?>"
                            class="form-control <?php if (!empty($errors[Registration::FIELD_REPEAT_PASSWORD])) echo 'is-invalid' ?>">
-                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_REPEAT_PASSWORD] ?></div>
+                    <div class="invalid-feedback"><?php echo $errors[Registration::FIELD_REPEAT_PASSWORD] ?? '' ?></div>
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
             </form>
