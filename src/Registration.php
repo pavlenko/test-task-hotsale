@@ -92,8 +92,14 @@ class Registration
             }
         }
 
+        $logFile = __DIR__ . '/../log/app.log';
+        if (empty($errors)) {
+            $message = 'User with email ' . $request->get(self::FIELD_EMAIL) . ' registered successfully' . PHP_EOL;
+        } else {
+            $message = 'Registration error from IP ' . $request->getClientIp() . ': '. implode('; ', $errors). PHP_EOL;
+        }
 
-        //TODO log result
+        file_put_contents($logFile, $message, FILE_APPEND);
 
         return $errors;
     }
